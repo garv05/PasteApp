@@ -12,22 +12,21 @@ const Paste = () => {
   function handleDelete(pasteId){
     dispatch(removeFromPastes(pasteId));
   }
-  function handleShare(pasteId){
-    const shareUrl = 'http://localhost:5173/pastes/${pasteId}';
-    if(navigator.share){
-      navigator.share({
-        title: "Click out this paste",
-        text : "Here's a paste I wanted to share with you:",
-        url: shareUrl,
-      })
-      .then(() => toast.success("Shared Successfully"))
-      .catch((error) => toast.error("Error in Sharing", error));
+  function handleShare(pasteId) {
+    const shareUrl = `https://paste-app05.vercel.app/pastes/${pasteId}`;
+    if (navigator.share) {
+        navigator.share({
+            title: "Check out this paste",
+            text: "Here's a paste I wanted to share with you:",
+            url: shareUrl,
+        })
+        .then(() => toast.success("Shared Successfully"))
+        .catch((error) => toast.error("Error in Sharing", error));
+    } else {
+        alert(`Copy this link to share: ${shareUrl}`);
+    }
+};
 
-    }
-    else{
-      alert('Copy this link to share: ${shareUrl}');
-    }
-  };
   return (
     <div>
       <input
